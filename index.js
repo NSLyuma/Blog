@@ -1,8 +1,3 @@
-//чтобы запустить этот сервер, в терминале ввести node index
-//если всё работает, то появится Server OK
-//затем в браузере ввести localhost:4444
-//и там появится надпись Hello from server to client
-
 import express from "express";
 
 const app = express();
@@ -23,3 +18,5 @@ app.listen(4444, (err) => {
 
   console.log("Server OK"); //это если сервер запустился
 });
+
+//для запуска ввести в терминале npm run start:dev
