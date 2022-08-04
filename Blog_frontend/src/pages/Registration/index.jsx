@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
+import { fetchRegister, selectIsAuth } from "../../redux/slices/auth";
 import { Navigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
@@ -16,21 +16,20 @@ export const Registration = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      fullName: "NSLyuma123",
-      email: "lyuma@test.ru",
-      password: "1234",
+      fullName: "AdminLord",
+      email: "admin@mail.ru",
+      password: "admin",
     },
     mode: "onChange",
   });
 
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values));
+    const data = await dispatch(fetchRegister(values));
     if (!data.payload) {
-      alert("Не удалось авторизоваться");
+      alert("Не удалось зарегистрироваться");
     }
     if ("token" in data.payload) {
       window.localStorage.setItem("token", data.payload.token);
