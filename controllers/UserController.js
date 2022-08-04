@@ -1,17 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { validationResult } from "express-validator";
 import UserModel from "../models/User.js";
 
 export const register = async (req, res) => {
   //если придёт запрос на /auth/register, мы проверяем, есть ли в registerValidation то, что мы хотим
   //если есть, то выполняется функция ниже
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array());
-    }
-
     //3 строки ниже - шифрование пароля
     const password = req.body.password;
     const salt = await bcrypt.genSalt(10);
@@ -22,6 +16,7 @@ export const register = async (req, res) => {
       fullName: req.body.fullName,
       avatarUrl: req.body.avatarUrl,
       passwordHash: hash,
+      createdAt: req.body.createdAt,
     });
 
     const user = await doc.save();
