@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
 import { PostSkeleton } from "./Skeleton";
+import { fetchRemovePost } from "../../redux/slices/posts";
 
 export const Post = ({
   id,
@@ -32,7 +33,9 @@ export const Post = ({
   }
 
   const onClickRemove = () => {
-    dispatch();
+    if (window.confirm("Вы действительно хотите удалить статью?")) {
+      dispatch(fetchRemovePost(id));
+    }
   };
 
   return (

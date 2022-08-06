@@ -44,7 +44,7 @@ export const AddPost = () => {
   const onSubmit = async () => {
     try {
       setLoading(true);
-      const fields = { title, text, tags: tags.split(","), imageUrl };
+      const fields = { title, text, tags, imageUrl };
       const { data } = await axios.post("/posts", fields);
       const id = data._id;
       navigate(`/posts/${id}`);
